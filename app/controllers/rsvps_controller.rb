@@ -5,6 +5,18 @@ class RsvpsController < ApplicationController
   # GET /rsvps.json
   def index
     @rsvps = Rsvp.all
+    @count = 0
+    @party_pooper = 0
+    @rsvps.each do |r|
+      if r.attending == true
+        @count +=1
+      else
+        @party_pooper +=1
+      end
+      if r.head.to_i > 0
+        @count += r.head
+      end
+    end
   end
 
   # GET /rsvps/1
